@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.minecraftforge.lex.mappingtoy;
+package net.neoforged.mappingtoy;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,22 +42,23 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import static net.neoforged.mappingtoy.JarMetadata.makeMetadata;
+import static net.neoforged.mappingtoy.JarRenamer.makeMappedJar;
+
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.util.PathConverter;
-import net.minecraftforge.lex.mappingtoy.VersionJson.Download;
-import net.minecraftforge.lex.mappingtoy.VersionJson.DownloadInfo;
-import net.minecraftforge.mergetool.AnnotationVersion;
-import net.minecraftforge.mergetool.Merger;
-import net.minecraftforge.srgutils.IMappingFile;
-import net.minecraftforge.srgutils.IMappingFile.IClass;
-import net.minecraftforge.srgutils.IMappingFile.IField;
-import net.minecraftforge.srgutils.IMappingFile.IMethod;
-import net.minecraftforge.srgutils.MinecraftVersion;
-
-import static net.minecraftforge.lex.mappingtoy.JarMetadata.makeMetadata;
-import static net.minecraftforge.lex.mappingtoy.JarRenamer.makeMappedJar;
+import net.neoforged.mappingtoy.VersionJson.Download;
+import net.neoforged.mappingtoy.VersionJson.DownloadInfo;
+import net.neoforged.mergetool.AnnotationVersion;
+import net.neoforged.mergetool.Merger;
+import net.neoforged.srgutils.IMappingFile;
+import net.neoforged.srgutils.IMappingFile.IClass;
+import net.neoforged.srgutils.IMappingFile.IField;
+import net.neoforged.srgutils.IMappingFile.IMethod;
+import net.neoforged.srgutils.MinecraftVersion;
 
 public class MappingToy {
     public static final Logger log = Logger.getLogger("MappingToy");

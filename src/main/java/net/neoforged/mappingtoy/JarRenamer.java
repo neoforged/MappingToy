@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.minecraftforge.lex.mappingtoy;
+package net.neoforged.mappingtoy;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,8 +39,8 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.commons.ClassRemapper;
 import org.objectweb.asm.commons.Remapper;
 
-import net.minecraftforge.srgutils.IMappingFile;
-import net.minecraftforge.srgutils.IMappingFile.IClass;
+import net.neoforged.srgutils.IMappingFile;
+import net.neoforged.srgutils.IMappingFile.IClass;
 
 public class JarRenamer {
     public static void makeMappedJar(Path root, String mapping, String prefix, boolean force) {

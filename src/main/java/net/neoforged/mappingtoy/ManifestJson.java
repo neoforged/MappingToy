@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.minecraftforge.lex.mappingtoy;
+package net.neoforged.mappingtoy;
 
 import java.net.URL;
 import java.util.Date;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraftforge.srgutils.MinecraftVersion;
+import net.neoforged.srgutils.MinecraftVersion;
 
 public class ManifestJson {
     public static final String MOJANG_URL = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";

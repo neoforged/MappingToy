@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.minecraftforge.lex.mappingtoy;
+package net.neoforged.mappingtoy;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,12 +55,11 @@ import org.objectweb.asm.tree.LineNumberNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
-
-import net.minecraftforge.lex.mappingtoy.JarMetadata.ClassInfo.FieldInfo;
-import net.minecraftforge.lex.mappingtoy.JarMetadata.ClassInfo.MethodInfo;
-import net.minecraftforge.lex.mappingtoy.JarMetadata.ClassInfo.RecordInfo;
-import net.minecraftforge.srgutils.IMappingFile;
-import net.minecraftforge.srgutils.IMappingFile.IClass;
+import net.neoforged.mappingtoy.JarMetadata.ClassInfo.FieldInfo;
+import net.neoforged.mappingtoy.JarMetadata.ClassInfo.MethodInfo;
+import net.neoforged.mappingtoy.JarMetadata.ClassInfo.RecordInfo;
+import net.neoforged.srgutils.IMappingFile;
+import net.neoforged.srgutils.IMappingFile.IClass;
 
 public class JarMetadata {
     private static boolean DEBUG = Boolean.parseBoolean(System.getProperty("toy.debugLambdas", "false"));

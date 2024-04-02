@@ -1,7 +1,9 @@
+import net.neoforged.gradleutils.PomUtilsExtension.License
+
 plugins {
   id 'org.cadixdev.licenser' version '0.6.1'
-  id 'net.minecraftforge.gradleutils' version '2.+'
-  id 'com.github.johnrengelman.shadow' version '7.0.0'
+  id 'net.neoforged.gradleutils' version '3.0.0-alpha.12'
+  id 'com.github.johnrengelman.shadow' version '8.1.1'
   id 'maven-publish'
   id 'java'
   id 'eclipse'
@@ -9,12 +11,13 @@ plugins {
 }
 
 ext {
-    ASM_VERSION = '9.2'
+    ASM_VERSION = '9.5'
 }
 
 repositories {
+    mavenLocal()
+    maven { url = 'https://maven.neoforged.net/releases/' }
     mavenCentral()
-    maven { url = 'https://maven.minecraftforge.net/' }
 }
 
 dependencies {
@@ -24,18 +27,17 @@ dependencies {
     implementation "org.ow2.asm:asm-util:${ASM_VERSION}"
     implementation 'net.sf.jopt-simple:jopt-simple:6.0-alpha-3'
     implementation 'com.google.code.gson:gson:2.8.7'
-    implementation 'net.minecraftforge:mergetool:1.1.4'
-    implementation 'net.minecraftforge:srgutils:0.4.13'
+    implementation 'net.neoforged:mergetool:2.0.5'
+    implementation 'net.neoforged:srgutils:1.0.1'
 }
 
 ext {
-    MAIN_CLASS = 'net.minecraftforge.lex.mappingtoy.MappingToy'
-    GIT_REPO = 'LexManos/MappingToy'
+    MAIN_CLASS = 'net.neoforged.mappingtoy.MappingToy'
     SPEC_VERSION = gradleutils.gitInfo.tag
 }
 
-group = 'net.minecraftforge.lex'
-version = gradleutils.getTagOffsetBranchVersion()
+group = 'net.neoforged'
+version = gradleutils.version
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 license {
@@ -49,11 +51,11 @@ ext {
             attributes('Main-Class': MAIN_CLASS)
         attributes([
             'Specification-Title':      project.name,
-            'Specification-Vendor':     'Forge Development LLC',
+            'Specification-Vendor':     'NeoForged',
             'Specification-Version':    SPEC_VERSION,
             'Implementation-Title':     project.name,
             'Implementation-Version':   project.version,
-            'Implementation-Vendor':    'Forge Development LLC'
+            'Implementation-Vendor':    'NeoForged'
         ] as LinkedHashMap, project.group.replaceAll('\\.', '/') + '/' + project.name + '/')
     }
 }
@@ -79,8 +81,16 @@ jar {
 
 shadowJar {
     minimize()
-    classifier 'all'
+    archiveClassifier = 'all'
     manifest.from(MANIFEST)
+}
+
+gradleutils {
+    setupSigning()
+}
+
+changelog {
+    from '2.0'
 }
 
 publishing {
@@ -89,36 +99,17 @@ publishing {
             artifact sourcesJar
             artifact jar
             artifact shadowJar
+            gradleutils.sign(it)
+
             pom {
                 name = project.archivesBaseName
-                packaging = 'jar'
-                url = "https://github.com/${GIT_REPO}"
-
-                scm {
-                    url = "https://github.com/${GIT_REPO}"
-                    connection = "scm:git:git://github.com/${GIT_REPO}.git"
-                    developerConnection = "scm:git:git@github.com:${GIT_REPO}.git"
-                }
-
-                issueManagement {
-                    system = 'github'
-                    url = "https://github.com/${GIT_REPO}/issues"
-                }
-
-                developers {
-                    developer {
-                        id = 'LexManos'
-                        name = 'Lex Manos'
-                    }
-                }
+                pomUtils.neoForgedDeveloper(it)
+                pomUtils.license(it, License.LGPL_v2)
+                pomUtils.githubRepo(it, 'MappingToy')
             }
         }
     }
     repositories {
-        maven gradleutils.getPublishingForgeMaven()
+        maven gradleutils.publishingMaven
     }
-}
-
-changelog {
-    fromCommit "f753175b79b648af8c84f4df3122ecfaf9ea5870"
 }
